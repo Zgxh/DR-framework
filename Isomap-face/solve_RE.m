@@ -1,7 +1,6 @@
 function []=solve_RE()
 
 load face_data.mat;
-d=2;
 m=698;
 data=images(:,1:m);
 

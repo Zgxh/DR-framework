@@ -1,4 +1,4 @@
-function Xnew = Rec_BHNE(X, K)
+function Xnew = BHNE_epoch_var(X, K, EPOCH)
 
     tol = 1e-5;
     [D, N] = size(X);
@@ -21,7 +21,7 @@ function Xnew = Rec_BHNE(X, K)
     %++++++++++++++++++++++++++  BHNE权值求解过程  ++++++++++++++++++++++++++++
     fprintf(1,'-->Solving for 2nd reconstruction weights.\n');
     tol=1e-6;
-    EPOCH = 2;                                                  % 迭代轮次
+%     EPOCH = 2;                                                  % 迭代轮次
     Xnew=zeros(D,N);
     for ii=1:N
         % 第一轮得到初始值，从第二轮迭代开始进行更新
