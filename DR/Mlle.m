@@ -1,5 +1,6 @@
 function [mappedX, err] = Mlle(X, no_dims, k, tol)
 
+
     if ~exist('no_dims', 'var')
         no_dims = 2;
     end
@@ -10,7 +11,7 @@ function [mappedX, err] = Mlle(X, no_dims, k, tol)
         eig_impl = 'Matlab';
     end
     modified_tol=1e-12;
-
+    % Get dimensionality and number of dimensions
     [n, D] = size(X);
 
     % Compute pairwise distances and find nearest neighbours (vectorized implementation)
@@ -22,7 +23,15 @@ function [mappedX, err] = Mlle(X, no_dims, k, tol)
         mapping.nbhd = distance;
     end
 
+    % Find reconstruction weights for all points by solving the MSE problem 
+    % of reconstructing a point from each neighbours. A used constraint is 
+    % that the sum of the reconstruction weights for a point should be 1.
     disp('Compute reconstruction weights...');
+%     if k > d 
+%         tol = 1e-5;
+%     else
+%         tol = 0;
+%     end
 
     % Construct reconstruction weight matrix
     V = zeros(k,k,n);
@@ -71,8 +80,8 @@ end
    
   eta_range=repmat(evals_cumsum(:,end),1,nev-1)./evals_cumsum(:,1:end-1)-1;
   for i=1:n
-      [~,sb]=find(eta_range(i,end:-1:1)<eta); 
-      s_range(i)=sb(length(sb));
+      [~,sb]=find(eta_range(i,end:-1:1)>eta); 
+      s_range(i)=sb(1)-1;
   end
   s_range=s_range+k-nev;
   
@@ -93,7 +102,8 @@ end
             h=h./norm_h;
         end
         Wi=Vi-2*(Vi*h)*h'+(1-alpha_i)*repmat(W(i,:)',1,s_i);
-
+        
+        
        w = Wi;
        j = neighborhood(:,i);
        M(j, j) = M(j, j) + w * w';
@@ -124,6 +134,7 @@ end
 		no_dims = size(mappedX, 2) - 1;
 		warning(['Target dimensionality reduced to ' num2str(no_dims) '...']);
     end
-    mappedX = mappedX(:,ind(2:no_dims + 1));
+    mappedX = mappedX(:,ind(2:no_dims + 1));   
     err=sum(eigenvals(2:no_dims + 1));
-	
+    % throw away zero eigenvector/value					
+

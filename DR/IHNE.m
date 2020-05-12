@@ -9,7 +9,7 @@ neighborhood = index(2:(1+K),:);
 
 fprintf(1,'-->Solving for reconstruction weights.\n');
 
-tol=1e-5;
+% tol=1e-5;
 
 W = zeros(K,N);
 for ii=1:N

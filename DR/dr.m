@@ -25,18 +25,22 @@ tol = [1e-3,1e-4,1e-4,1e-3,1e-3,1e-4,1e-4,1e-4,1e-4,1e-2,1e-2,1e-4,1e-3,1e-4,1e-
 numpoints = 300;            % 生成数据点的个数
 
 % 选择需要对比的方法
-alg = {'LLE', 'HLLE', 'LLC', 'LTSA',  'IHNE', 'RHNE', 'BHNE'};       %  , 'CorrLLEO','MLLE',
+alg = {'LLE', 'HLLE', 'LLC', 'LTSA', 'MLLE', 'IHNE', 'RHNE', 'BHNE'};       %  , 'CorrLLEO',
 col = length(alg);
-row = 4;                    % 画图的行数
+row = 8;                    % 画图的行数
 no_dims =2;                 % 低维维度
 
-for p = 5                   % 选择数据集
+for p = 2                   % 选择数据集
     dataname=dataset{p};
     if strcmp(dataname,'trefoil')
         [X, labels] = generate_data(dataname,numpoints,0.8,3);
     else
         [X, labels] = generate_data(dataname,numpoints);
     end 
+    
+    % 保存高维数据与label
+    save(['./data/X_p=', num2str(p), '.mat'], 'X');
+    save(['./data/labels_p=', num2str(p), '.mat'], 'labels');
 
     scatter3(X(:,1), X(:,2), X(:,3), 23, labels,'.');
     axis tight;
@@ -51,6 +55,7 @@ for p = 5                   % 选择数据集
         for j=1:col
             subplot(row,col,(i-1)*col+j)
             [mappedX]= compute_mapping(X, alg{j}, no_dims, k,tol(p));
+            save(['./data/Y_p=', num2str(p), '_', alg{j}, '_k=', num2str(k), '.mat'], 'mappedX');
             scatter(mappedX(:,1), mappedX(:,2), 23, labels,'.');
             axis tight;
             set(gca,'xtick',[],'ytick',[]);

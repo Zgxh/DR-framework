@@ -3,7 +3,7 @@ function [Y, T] = BHNE(data, d, K, tol)
 X = data';  %每列是一个数据点
 [D, N] = size(X);
 X2 = sum(X.^2,1);
-tol=1e-5;
+% tol=1e-5;
 distance = repmat(X2, N, 1) + repmat(X2', 1, N) - 2 * X' * X;
 [sorted, index] = sort(distance);
 neighborhood = index(2:(1+K), :);
@@ -24,8 +24,8 @@ end
 fprintf(1,'-->Solving for 2nd reconstruction weights.\n');
 
 %设置超参数
-EPOCH = 2;  % 迭代轮次
-tol=1e-6;
+EPOCH = 3;  % 迭代轮次
+% tol=1e-6;
 
 T=zeros(N, N);
 for ii=1:N
