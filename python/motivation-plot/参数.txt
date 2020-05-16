@@ -1,0 +1,6 @@
+top=0.78,
+bottom=0.21,
+left=0.050,
+right=0.950,
+hspace=0.2,
+wspace=0.2

@@ -16,7 +16,7 @@ for i=1:row
 
     M = zeros(6, 23028); % 存放重建后的高维数据
     m_error = zeros(1, 5); % 统计当前idx图像的重建误差
-    idx = 141; % 选择当前画哪个index的图像
+    idx = 46; % 选择当前画哪个index的图像
 
     % 原图
     M(1, :) = uint8([255*data(:,idx)']); 

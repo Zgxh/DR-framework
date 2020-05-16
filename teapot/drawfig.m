@@ -7,14 +7,14 @@ m=400;
 indx=1:400;
 teapots=teapots(:,indx(1:2:m));
 k = [2,3,4,5];
-row=5;
+row=1;
 col=7;
-ks=1:4:size(teapots,2);
+ks=1:10:size(teapots,2);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%  ½µÎ¬ÊµÑé  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 for i=1:row
     
-    K=1+i;
+    K=4;
 
     % 1. LLE
     [poses]=lle(teapots,K,d); 
@@ -36,10 +36,10 @@ for i=1:row
     subplot(row,col,(i-1)*col+3)
     showFacesOnR2(teapots,poses,ks);
 
-%     %  5. MLLE
-%     [poses,err] = Mlle(teapots, d, K);
-%     subplot(row,col,(i-1)*col+4)
-%     showFacesOnR2(teapots,poses,ks);
+    %  5. MLLE
+    [poses,err] = Mlle(teapots, d, K);
+    subplot(row,col,(i-1)*col+4)
+    showFacesOnR2(teapots,poses,ks);
 
     % 6. IHNE
     [poses] = IHNE(teapots,K,d);
