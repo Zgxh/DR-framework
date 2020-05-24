@@ -27,7 +27,7 @@ numpoints = 300;            % 生成数据点的个数
 % 选择需要对比的方法
 alg = {'LLE', 'HLLE', 'LLC', 'LTSA', 'MLLE', 'IHNE', 'RHNE', 'BHNE'};       %  , 'CorrLLEO',
 col = length(alg);
-row = 8;                    % 画图的行数
+row = 1;                    % 画图的行数
 no_dims =2;                 % 低维维度
 
 for p = 2                   % 选择数据集
@@ -51,7 +51,7 @@ for p = 2                   % 选择数据集
 
     figure
     for i=1:row
-        k=3+i;              % 设置k的起始大小
+        k=6+i;              % 设置k的起始大小
         for j=1:col
             subplot(row,col,(i-1)*col+j)
             [mappedX]= compute_mapping(X, alg{j}, no_dims, k,tol(p));
