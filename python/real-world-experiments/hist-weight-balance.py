@@ -44,22 +44,22 @@ colors = plt.cm.summer(1 - array_hist)
 
 fig, ax = plt.subplots()
 # hist
-rects1 = ax.bar(x, data1_num, width, color=colors, label='The number of each P')
+rects1 = ax.bar(x, data1_num, width, color=colors, label='The number of each $P$')
 # autolabel(rects1) # 显示数值
 # ax.set_xlabel(r'$\|N_i \cup$$(\cup_{l=1}^{k} N_{il})\|$')
-ax.set_xlabel('P')
-ax.set_ylabel('The number of each P') # in Statue-Face data1set
+ax.set_xlabel('$P$')
+ax.set_ylabel('The number of each $P$') # in Statue-Face data1set
 ax.set_xticks(x)
 ax.set_xticklabels(neighbors_num)
 ax.set_ylim(0, max(neighbors_hist) + 50)
-ax.legend(loc=1)
+ax.legend(prop={'size':8},loc=1)
 
 # line graph
 ax2 = ax.twinx()
-rects2 = ax2.plot(x, data2, c='k', marker='.', label='The number of')
-ax2.set_ylim(0, max(data2) + 50)
-ax2.set_ylabel("2222")
-ax2.legend(loc=2)
+rects2 = ax2.plot(x, data2, c='k', marker='.', label='The frequency of $x_i$')
+ax2.set_ylim(0, max(data2) + 100)
+ax2.set_ylabel("The frequency of $x_i$")
+ax2.legend(prop={'size':8},loc=2)
 # plt.legend(prop={'family':'SimHei','size':8},loc="upper left") 
 # for i, (_x, _y) in enumerate(zip(x, data2)):  
 #     plt.text(_x, _y, data2[i], color='black', fontsize=10,)  # 将数值显示在图形上
